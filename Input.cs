@@ -14,6 +14,7 @@
             return choice;
         }
 
+        // Method for getting valid index based on GetUserChoice
         internal static int GetIndex(int maxIndex)
         {
             int index = GetUserChoice();
@@ -39,6 +40,7 @@
             return false;
         }
 
+        // Method for getting input string from user
         internal static string GetUserString()
         {
             string? input = Console.ReadLine();
@@ -52,6 +54,7 @@
             return input;
         }
 
+        // Method for formatting user input based on GetUserString
         internal static string[] GetFirstAndLastName()
         {
             string[] name = GetUserString().Split(' ');

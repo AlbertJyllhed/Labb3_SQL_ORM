@@ -31,6 +31,7 @@ namespace Labb3_SQL_ORM
             }
         }
 
+        // Sorts query of students into ascedning or descending order based on first name
         private static List<Student> SortStudentsByFirstName(IQueryable<Student> students, bool ascending = true)
         {
             if (ascending)
@@ -45,6 +46,7 @@ namespace Labb3_SQL_ORM
             return students.ToList();
         }
 
+        // Sorts query of students into ascedning or descending order based on last name
         private static List<Student> SortStudentsByLastName(IQueryable<Student> students, bool ascending = true)
         {
             if (ascending)
