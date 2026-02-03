@@ -12,18 +12,17 @@ namespace Labb3_SQL_ORM
             using (var context = new Labb2Context())
             {
                 var studentQuery = (from s in context.Students select s);
-                List<Student> students;
 
                 if (sortByFirstName)
                 {
-                    students = SortStudentsByFirstName(studentQuery, ascending);
+                    studentQuery = SortStudentsByFirstName(studentQuery, ascending);
                 }
                 else
                 {
-                    students = SortStudentsByLastName(studentQuery, ascending);
+                    studentQuery = SortStudentsByLastName(studentQuery, ascending);
                 }
 
-                foreach (var student in students)
+                foreach (var student in studentQuery)
                 {
                     Console.WriteLine($"{student.FirstName} {student.LastName}, " +
                         $"Personnummer: {student.PersonalNumber}");
@@ -31,8 +30,7 @@ namespace Labb3_SQL_ORM
             }
         }
 
-        // Sorts query of students into ascedning or descending order based on first name
-        private static List<Student> SortStudentsByFirstName(IQueryable<Student> students, bool ascending = true)
+        private static IQueryable<Student> SortStudentsByFirstName(IQueryable<Student> students, bool ascending = true)
         {
             if (ascending)
             {
@@ -43,11 +41,10 @@ namespace Labb3_SQL_ORM
                 students = students.OrderByDescending(s => s.FirstName);
             }
 
-            return students.ToList();
+            return students;
         }
 
-        // Sorts query of students into ascedning or descending order based on last name
-        private static List<Student> SortStudentsByLastName(IQueryable<Student> students, bool ascending = true)
+        private static IQueryable<Student> SortStudentsByLastName(IQueryable<Student> students, bool ascending = true)
         {
             if (ascending)
             {
@@ -58,7 +55,7 @@ namespace Labb3_SQL_ORM
                 students = students.OrderByDescending(s => s.LastName);
             }
 
-            return students.ToList();
+            return students;
         }
 
         // Method to fetch all available classes for the user to choose from
@@ -84,20 +81,19 @@ namespace Labb3_SQL_ORM
                                            on s.ClassId equals c.Id
                                            where c.ClassName == className
                                            select s);
-                List<Student> students;
 
                 if (sortByFirstName)
                 {
-                    students = SortStudentsByFirstName(studentClassesQuery, ascending);
+                    studentClassesQuery = SortStudentsByFirstName(studentClassesQuery, ascending);
                 }
                 else
                 {
-                    students = SortStudentsByLastName(studentClassesQuery, ascending);
+                    studentClassesQuery = SortStudentsByLastName(studentClassesQuery, ascending);
                 }
 
                 Console.WriteLine($"Students in {className}:");
 
-                foreach (var s in students)
+                foreach (var s in studentClassesQuery)
                 {
                     Console.WriteLine($"{s.FirstName} {s.LastName}, " +
                         $"Personnummer: {s.PersonalNumber}");
