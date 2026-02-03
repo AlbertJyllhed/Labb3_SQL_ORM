@@ -111,6 +111,7 @@ namespace Labb3_SQL_ORM
             DataHandler.FetchStudentsInClass(classes[index].ClassName, sortByFirstName, ascending);
         }
 
+        // Menu method for adding a new employee to the database
         private static void AddEmployee()
         {
             Console.Write("Enter a name for the new employee: ");
